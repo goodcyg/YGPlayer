@@ -14,6 +14,7 @@
 #import "WMPlayerViewController.h"
 #import "ZFPlayerViewController.h"
 #import "MPViewController2.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 
 
@@ -93,7 +94,10 @@
     }
     
     if (model.type == MPMoviePlayer) {
-        MPViewController2 *p = [MPViewController2 new];
+        // 设置资源路径
+        NSURL *url = [NSURL URLWithString:@"http:/127.0.0.1:10086/20184k.m4v"];
+        MPMoviePlayerViewController *p = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+        
         [self presentViewController:p animated:NO completion:nil];
         return;
     }
