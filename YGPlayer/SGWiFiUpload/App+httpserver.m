@@ -43,7 +43,7 @@
     mgr.savePath = webPath;
     mgr.webPath = webPath;
     [[FTXConfigManger sharedConfigManger] WiFiFileShareOn];
-    BOOL success = [mgr startHTTPServerAtPort:10086];
+    BOOL success = [mgr startHTTPServerAtPort:10088];
     
     if (success) {
         

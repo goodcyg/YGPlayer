@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger, CHPlayerType){
      WMPlayer    = 3,
      ZFPlayer=4,
      MPMoviePlayer=5,
-    AVPlayerVC
+    AVPlayerVC,
+    LocalFolder
 };
 
 @interface CHPlayerView : UIView

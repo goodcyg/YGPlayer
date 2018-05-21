@@ -15,6 +15,9 @@
 #import "ZFPlayerViewController.h"
 #import "MPViewController2.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "IJKDemoLocalFolderViewController.h"
+#import "HYFileManager.h"
+#import <AVKit/AVKit.h>
 
 
 
@@ -48,8 +51,8 @@
           make.left.right.bottom.equalTo(self.view);
      }];
      
-     NSArray *titles = @[@"爱奇艺,芒果,优酷播放器(无导航栏)",@"带导航栏",@"全屏",@"WMPlayer",@"ZFPlayer",@"MPMoviePlayer",@"AVPlayer"];
-     NSArray *type   = @[@(PlayerTypeOfNoNavigationBar),@(PlayerTypeOfNavigationBar),@(PlayerTypeOfFullScreen),@(WMPlayer),@(ZFPlayer),@(MPMoviePlayer),@(AVPlayerVC)];
+     NSArray *titles = @[@"爱奇艺,芒果,优酷播放器(无导航栏)",@"带导航栏",@"全屏",@"WMPlayer",@"ZFPlayer",@"MPMoviePlayer",@"AVPlayer",@"本地视频"];
+     NSArray *type   = @[@(PlayerTypeOfNoNavigationBar),@(PlayerTypeOfNavigationBar),@(PlayerTypeOfFullScreen),@(WMPlayer),@(ZFPlayer),@(MPMoviePlayer),@(AVPlayerVC),@(LocalFolder)];
      NSMutableArray *datas = [NSMutableArray arrayWithCapacity:titles.count];
      [titles enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
           VideoModel *model = [VideoModel new];
@@ -106,7 +109,7 @@
        
         AVPlayerViewController *player = [AVPlayerViewController new];
         // 设置资源路径
-        NSURL *url = [NSURL URLWithString:@"http:/127.0.0.1:10086/20184k.m4v"];
+        NSURL *url = [NSURL URLWithString:@"http:/127.0.0.1:10088/20184k.m4v"];
         // 控制器的player播放器
         player.player = [AVPlayer playerWithURL:url];
         // 试图的填充模式
@@ -119,7 +122,12 @@
         [self presentViewController:player animated:NO completion:nil];
         return;
     }
-    
+    if (model.type == LocalFolder) {
+        IJKDemoLocalFolderViewController *l=[[IJKDemoLocalFolderViewController alloc] initWithFolderPath:[HYFileManager documentsDir] ];
+         [self.navigationController pushViewController:l animated:YES];
+        return;
+        
+    }
      VideoPlayerViewController *video = [VideoPlayerViewController new];
      video.type  = model.type;
      [self.navigationController pushViewController:video animated:YES];
